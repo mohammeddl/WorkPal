@@ -1,5 +1,7 @@
 package main.java.com.workpal.model;
 
-public class Member {
+public class Member extends Person {
+
+    
     
 }
