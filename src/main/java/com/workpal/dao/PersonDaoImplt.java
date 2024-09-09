@@ -42,7 +42,7 @@ public class PersonDaoImplt implements PersonDao{
 
 
     public void saveMember(String name, String password, String email, String role) {
-        String query = "INSERT INTO person (name, password, email, role) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO member (name, password, email, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, name);
             stmt.setString(2, password);

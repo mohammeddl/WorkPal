@@ -2,12 +2,12 @@ package Menu;
 
 import java.util.Scanner;
 
-import main.java.com.workpal.repository.AdminRepositoryImplt;
+import main.java.com.workpal.service.AdminServiceImplt;
 
 
 
 public class AdminMenu {
-    public static void displayAdminMenu(AdminRepositoryImplt adminRepositoryImplt) {
+    public static void displayAdminMenu(AdminServiceImplt adminServiceImplt) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -29,12 +29,12 @@ public class AdminMenu {
                     String password = scanner.nextLine();
                     System.out.println("Enter role: ");
                     String role = scanner.nextLine();
-                    adminRepositoryImplt.addMember(name, email, password,role);
+                    adminServiceImplt.addMember(name, email, password,role);
                     break;
                 case 2:
                     System.out.println("Enter member ID to delete: ");
                     int id = scanner.nextInt();
-                    adminRepositoryImplt.deletePerson(id);
+                    adminServiceImplt.deletePerson(id);
                     break;
                 case 3:
                     System.exit(0);

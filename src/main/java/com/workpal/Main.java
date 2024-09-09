@@ -5,6 +5,7 @@ import main.java.com.workpal.dao.PersonDaoImplt;
 import main.java.com.workpal.repository.AdminRepositoryImplt;
 import main.java.com.workpal.repository.PersonRepositoryImplt;
 // import main.java.com.workpal.service.AdminServiceImplt;
+import main.java.com.workpal.service.AdminServiceImplt;
 
 // import main.java.com.workpal.config.DatabaseConnection;
 
@@ -17,9 +18,11 @@ public class Main {
         PersonRepositoryImplt personRepository = new PersonRepositoryImplt(personDao);
         AdminRepositoryImplt adminRepositoryImplt = new AdminRepositoryImplt(personDao);
 
+        AdminServiceImplt adminServiceImplt = new AdminServiceImplt(adminRepositoryImplt);
 
 
-        new LoginMenu(personRepository, adminRepositoryImplt);
+
+        new LoginMenu(personRepository, adminServiceImplt);
 
     LoginMenu.displayLoginMenu();
     //  DatabaseConnection dbConnection = DatabaseConnection.getInstance();

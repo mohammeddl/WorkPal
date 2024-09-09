@@ -12,11 +12,11 @@ import main.java.com.workpal.service.AdminServiceImplt;
 public class LoginMenu {
 
     private static PersonRepositoryImplt personRepositoryImplt;
-    private static AdminRepositoryImplt adminRepositoryImplt;
+    private static AdminServiceImplt adminServiceImplt;
 
-    public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminRepositoryImplt adminRepositoryImplt) {
+    public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminServiceImplt adminServiceImplt) {
         LoginMenu.personRepositoryImplt = personRepositoryImplt;
-        LoginMenu.adminRepositoryImplt = adminRepositoryImplt;
+        LoginMenu.adminServiceImplt = adminServiceImplt;
     }
 
     public static void displayLoginMenu() {
@@ -39,7 +39,7 @@ public class LoginMenu {
             System.out.println("you are admin" + (person instanceof Admin));
         
             if (person.getRole().equals("admin")) {
-                AdminMenu.displayAdminMenu(adminRepositoryImplt);
+                AdminMenu.displayAdminMenu(adminServiceImplt);
             } else {
                 System.out.println("You are not authorized to manage members.");
             }
