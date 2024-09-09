@@ -1,5 +1,6 @@
 package main.java.com.workpal.dao;
 
+import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
@@ -29,7 +30,8 @@ public class PersonDaoImplt implements PersonDao{
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("password"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getString("role")
                 );
             }
         } catch (SQLException e) {
@@ -39,20 +41,22 @@ public class PersonDaoImplt implements PersonDao{
     }
 
 
-    public void save(Person person) {
-        String query = "INSERT INTO persons (name, password, email) VALUES (?, ?, ?)";
+    public void saveMember(String name, String password, String email, String role) {
+        String query = "INSERT INTO person (name, password, email, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, person.getName());
-            stmt.setString(2, person.getPassword());
-            stmt.setString(3, person.getEmail());
+            stmt.setString(1, name);
+            stmt.setString(2, password);
+            stmt.setString(3, email);
+            stmt.setString(4, role);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
     }
 
   public void deleteById(int id) {
-        String query = "DELETE FROM persons WHERE id = ?";
+        String query = "DELETE FROM person WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();

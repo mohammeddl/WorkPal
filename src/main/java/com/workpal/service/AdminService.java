@@ -3,6 +3,6 @@ package main.java.com.workpal.service;
 
 public interface AdminService {
 
-      void addPerson(String name , String email , String password);
+      void addMember(String name , String email , String password, String role);
       void deletePerson(int id); 
 } 

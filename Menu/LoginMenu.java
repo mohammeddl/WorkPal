@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 import main.java.com.workpal.model.Admin;
 import main.java.com.workpal.model.Person;
-import main.java.com.workpal.repository.PersonRepository;
-import main.java.com.workpal.service.AdminService;
+import main.java.com.workpal.repository.AdminRepositoryImplt;
+import main.java.com.workpal.repository.PersonRepositoryImplt;
+
+import main.java.com.workpal.service.AdminServiceImplt;
 
 public class LoginMenu {
 
-    private static PersonRepository personRepository;
-    private static AdminService adminService;
+    private static PersonRepositoryImplt personRepositoryImplt;
+    private static AdminRepositoryImplt adminRepositoryImplt;
 
-    public LoginMenu(PersonRepository personRepository, AdminService adminService) {
-        this.personRepository = personRepository;
-        this.adminService = adminService;
+    public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminRepositoryImplt adminRepositoryImplt) {
+        LoginMenu.personRepositoryImplt = personRepositoryImplt;
+        LoginMenu.adminRepositoryImplt = adminRepositoryImplt;
     }
 
     public static void displayLoginMenu() {
@@ -25,14 +27,19 @@ public class LoginMenu {
         System.out.println("Enter password: ");
         String password = scanner.nextLine();
 
-        
-        Person  person = personRepository.findByEmailAndPassword(email, password);
+        // if (personRepositoryImplt == null) {
+        //     System.out.println("PersonRepository is not initialized!");
+        //     return;
+        // }
+
+        Person  person = personRepositoryImplt.findByEmailAndPassword(email, password);
 
         if (person != null) {
             System.out.println("Welcome " + person.getName());
+            System.out.println("you are admin" + (person instanceof Admin));
         
-            if (person instanceof Admin) {
-                AdminMenu.displayAdminMenu(adminService);
+            if (person.getRole().equals("admin")) {
+                AdminMenu.displayAdminMenu(adminRepositoryImplt);
             } else {
                 System.out.println("You are not authorized to manage members.");
             }

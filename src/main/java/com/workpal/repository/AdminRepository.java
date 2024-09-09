@@ -2,10 +2,9 @@ package main.java.com.workpal.repository;
 
 
 
-import main.java.com.workpal.model.Person;
 
 
 public interface AdminRepository {
-    void addPerson(Person person);  
+    void addMember(String name, String email, String password, String role);  
     void deletePerson(int id);  
 }

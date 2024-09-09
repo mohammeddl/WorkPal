@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.management.RuntimeErrorException;
 
 public class DatabaseConnection{
 
@@ -37,7 +36,6 @@ public class DatabaseConnection{
 
     public boolean isConnectionValid() {
         try {
-            // The timeout parameter is in seconds
             return connection != null && connection.isValid(5);
         } catch (SQLException e) {
             e.printStackTrace();
