@@ -26,18 +26,18 @@ public class LoginMenu {
         String password = scanner.nextLine();
 
         
-         personRepository.findByEmailAndPassword(email, password);
+        Person  person = personRepository.findByEmailAndPassword(email, password);
 
-        // if (person != null) {
-        //     System.out.println("Welcome " + person.getName());
+        if (person != null) {
+            System.out.println("Welcome " + person.getName());
         
-        //     if (person instanceof Admin) {
-        //         AdminMenu.displayAdminMenu(adminService);
-        //     } else {
-        //         System.out.println("You are not authorized to manage members.");
-        //     }
-        // } else {
-        //     System.out.println("Invalid email or password!");
-        // }
+            if (person instanceof Admin) {
+                AdminMenu.displayAdminMenu(adminService);
+            } else {
+                System.out.println("You are not authorized to manage members.");
+            }
+        } else {
+            System.out.println("Invalid email or password!");
+        }
     }
 }

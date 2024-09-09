@@ -35,4 +35,13 @@ public class DatabaseConnection{
         return connection;
     }
 
+    public boolean isConnectionValid() {
+        try {
+            // The timeout parameter is in seconds
+            return connection != null && connection.isValid(5);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
