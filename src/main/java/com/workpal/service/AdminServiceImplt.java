@@ -21,5 +21,9 @@ public class AdminServiceImplt implements AdminService {
         adminRepository.deletePerson(memberId);
         System.out.println("Member deleted successfully.");
     }
+
+    public void displayAllMembers() {
+        adminRepository.displayAllUsers();
+    }
     
 }

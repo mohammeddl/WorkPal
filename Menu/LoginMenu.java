@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import main.java.com.workpal.model.Admin;
 import main.java.com.workpal.model.Person;
-import main.java.com.workpal.repository.AdminRepositoryImplt;
+
 import main.java.com.workpal.repository.PersonRepositoryImplt;
 
 import main.java.com.workpal.service.AdminServiceImplt;
@@ -36,8 +36,6 @@ public class LoginMenu {
 
         if (person != null) {
             System.out.println("Welcome " + person.getName());
-            System.out.println("you are admin" + (person instanceof Admin));
-        
             if (person.getRole().equals("admin")) {
                 AdminMenu.displayAdminMenu(adminServiceImplt);
             } else {

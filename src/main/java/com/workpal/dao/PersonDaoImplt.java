@@ -65,6 +65,23 @@ public class PersonDaoImplt implements PersonDao{
         }
     }
 
+    public void getAllMembersAndManagers(){
+        String query = "SELECT * FROM person";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                System.out.println("ID: " + resultSet.getInt("id"));
+                System.out.println("Name: " + resultSet.getString("name"));
+                System.out.println("Email: " + resultSet.getString("email"));
+                System.out.println("Role: " + resultSet.getString("role"));
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+    }
+}
+
 
 
 }

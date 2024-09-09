@@ -14,7 +14,8 @@ public class AdminMenu {
             System.out.println("Admin Menu:");
             System.out.println("1. Add Member");
             System.out.println("2. Delete Member");
-            System.out.println("3. Exit");
+            System.out.println("3. display all members and managers");
+            System.out.println("4. Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();  
@@ -37,6 +38,9 @@ public class AdminMenu {
                     adminServiceImplt.deletePerson(id);
                     break;
                 case 3:
+                    adminServiceImplt.displayAllMembers();
+                    break;
+                case 4:
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Try again.");

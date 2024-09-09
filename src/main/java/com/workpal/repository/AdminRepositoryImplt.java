@@ -20,4 +20,8 @@ public class AdminRepositoryImplt implements AdminRepository {
     public void deletePerson(int memberId) {
         personDao.deleteById(memberId);
     }
+
+    public void displayAllUsers() {
+        personDao.getAllMembersAndManagers();
+    }
 }
