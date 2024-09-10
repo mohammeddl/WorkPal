@@ -1,7 +1,6 @@
 package main.java.com.workpal;
 
 import Menu.LoginMenu;
-import Menu.MemberMenu;
 import Menu.RegisterMenu;
 import main.java.com.workpal.dao.MemberDaoImplt;
 import main.java.com.workpal.dao.PersonDaoImplt;
