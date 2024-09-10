@@ -12,12 +12,13 @@ public class PersonRepositoryImplt implements PersonRepository {
         this.personDao = personDao;
     }
 
-
-
-       public Person findByEmailAndPassword(String email, String password) {
-        return  personDao.login(email, password);
+    public void registerUser(String name, String email, String plainPassword, String role) {
+        personDao.registerUser(name, email, plainPassword, role);
     }
 
+    public Person findByEmailAndPassword(String email, String password) {
+        return  personDao.login(email, password);
+    }
 
 
     

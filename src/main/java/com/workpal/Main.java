@@ -2,6 +2,7 @@ package main.java.com.workpal;
 
 import Menu.LoginMenu;
 import Menu.MemberMenu;
+import Menu.RegisterMenu;
 import main.java.com.workpal.dao.MemberDaoImplt;
 import main.java.com.workpal.dao.PersonDaoImplt;
 import main.java.com.workpal.repository.AdminRepositoryImplt;
@@ -10,6 +11,7 @@ import main.java.com.workpal.repository.PersonRepositoryImplt;
 // import main.java.com.workpal.service.AdminServiceImplt;
 import main.java.com.workpal.service.AdminServiceImplt;
 import main.java.com.workpal.service.MemberServiceImplt;
+import main.java.com.workpal.service.PersonServiceImplt;
 
 // import main.java.com.workpal.config.DatabaseConnection;
 
@@ -27,12 +29,17 @@ public class Main {
         
         AdminServiceImplt adminServiceImplt = new AdminServiceImplt(adminRepositoryImplt);
         MemberServiceImplt memberServiceImplt = new MemberServiceImplt(memberRepositoryImplt);
+        PersonServiceImplt personServiceImplt = new PersonServiceImplt(personRepository);
 
 
         new LoginMenu(personRepository, adminServiceImplt, memberServiceImplt);
-        new MemberMenu(memberServiceImplt);
+        new RegisterMenu(personServiceImplt, adminServiceImplt);
 
-    LoginMenu.displayLoginMenu();
+        RegisterMenu.mainRegisterMenu();
+
+        LoginMenu.displayLoginMenu();
+
+
     //  DatabaseConnection dbConnection = DatabaseConnection.getInstance();
 
     //     if (dbConnection.isConnectionValid()) {

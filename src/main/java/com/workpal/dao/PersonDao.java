@@ -9,4 +9,5 @@ public interface PersonDao {
     void deleteById(int id);
     Person login(String email, String password);
     void getAllMembersAndManagers();
+    void registerUser(String name, String email, String plainPassword, String role);
 }

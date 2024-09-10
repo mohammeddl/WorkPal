@@ -1,11 +1,13 @@
 package main.java.com.workpal.dao;
 
-import java.lang.reflect.Member;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 
 import java.sql.SQLException;
+
+
 
 import main.java.com.workpal.config.DatabaseConnection;
 import main.java.com.workpal.model.Person;
@@ -16,6 +18,19 @@ public class PersonDaoImplt implements PersonDao{
 
     public PersonDaoImplt() {
         this.connection = DatabaseConnection.getInstance().getConnection();
+    }
+
+    public void registerUser(String name, String email, String password, String role) {
+        String query = "INSERT INTO person (name, email, password, role) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            stmt.setString(3, password); 
+            stmt.setString(4, role);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //method for logging in

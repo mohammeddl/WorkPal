@@ -30,11 +30,6 @@ public class LoginMenu {
         System.out.println("Enter password: ");
         String password = scanner.nextLine();
 
-        // if (personRepositoryImplt == null) {
-        //     System.out.println("PersonRepository is not initialized!");
-        //     return;
-        // }
-
         Person  person = personRepositoryImplt.findByEmailAndPassword(email, password);
 
         if (person != null) {
