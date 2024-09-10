@@ -7,6 +7,8 @@ import main.java.com.workpal.service.AdminServiceImplt;
 
 
 public class AdminMenu {
+
+    
     public static void displayAdminMenu(AdminServiceImplt adminServiceImplt) {
         Scanner scanner = new Scanner(System.in);
 

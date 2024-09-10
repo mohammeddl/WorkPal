@@ -18,7 +18,7 @@ public class PersonDaoImplt implements PersonDao{
         this.connection = DatabaseConnection.getInstance().getConnection();
     }
 
-
+    //method for logging in
     public Person login(String email, String password) {
         String query = "SELECT * FROM person WHERE email = ? AND password = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -40,7 +40,7 @@ public class PersonDaoImplt implements PersonDao{
         return null;
     }
 
-
+    //method for saving a member
     public void saveMember(String name, String password, String email, String role) {
         String query = "INSERT INTO member (name, password, email, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -55,6 +55,7 @@ public class PersonDaoImplt implements PersonDao{
         
     }
 
+    //method for deleting a member by id
   public void deleteById(int id) {
         String query = "DELETE FROM person WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -65,6 +66,7 @@ public class PersonDaoImplt implements PersonDao{
         }
     }
 
+    //method for getting all members and managers
     public void getAllMembersAndManagers(){
         String query = "SELECT * FROM person";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
