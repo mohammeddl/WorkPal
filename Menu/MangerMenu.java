@@ -4,6 +4,12 @@ import java.util.Scanner;
 public class MangerMenu {
 
     private static Scanner scanner = new Scanner(System.in);
+
+
+    public MangerMenu() {
+    }
+
+    // method to display the main menu
     public static void mainManagerMenu() {
         while (true) {
             displayManagerMenu();
@@ -30,7 +36,7 @@ public class MangerMenu {
         }
     }
 
-    // Method to display the register menu
+    // method to display the register menu
     public static void displayManagerMenu() {
         System.out.println("1. Manage Events");
         System.out.println("2. Manage Spaces");
