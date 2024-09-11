@@ -1,8 +1,13 @@
 package main.java.com.workpal.dao;
 
 import main.java.com.workpal.config.DatabaseConnection;
+import main.java.com.workpal.model.Event;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class ManagerDaoImplt implements ManagerDao {
@@ -35,5 +40,30 @@ public class ManagerDaoImplt implements ManagerDao {
             e.printStackTrace();
     }
     }
+    
+
+    public List<Event> displayEventsManager(int managerId){
+       List<Event> events = new ArrayList<>();
+        String req = "SELECT * FROM event WHERE managerid = ? " ;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, managerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getInt("eventId"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("managerid")
+                );
+                events.add(event);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+        return events;
+    }
+       
 
 }

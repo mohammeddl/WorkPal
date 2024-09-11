@@ -1,8 +1,12 @@
 package Menu;
 
 import java.util.Scanner;
+
+import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Person;
 import main.java.com.workpal.service.ManagerServiceImplt;
+
+import java.util.List;
 
 public class ManagerMenu {
 
@@ -98,13 +102,30 @@ public class ManagerMenu {
                 managerServiceImplt.deleteEvent(id);
                 break;
             case 4:
-                // Uncomment when view functionality is implemented
-                // managerServiceImplt.viewEvents();
+            displayEvents(person.getId());
                 break;
             case 5:
                 return;
             default:
                 System.out.println("Invalid choice. Try again.");
+        }
+    }
+
+
+    //method for displaying all events
+    private void displayEvents(int managerId) {
+        List<Event> events = managerServiceImplt.displayEventsManager(managerId);
+        if (events.isEmpty()) {
+            System.out.println("No events found.");
+        } else {
+            System.out.println("Event List:");
+            for (Event event : events) {
+                System.out.println("ID: " + event.getEventId() +
+                                ", Name: " + event.getName() +
+                                ", Date: " + event.getDate() +
+                                ", Location: " + event.getLocation() +
+                                ", Manager ID: " + event.getManagerId());
+            }
         }
     }
 }

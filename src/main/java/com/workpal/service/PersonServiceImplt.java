@@ -12,4 +12,9 @@ public class PersonServiceImplt implements PersonService {
         personRepository.registerUser(name, email, plainPassword, role);
         System.out.println("User registered successfully.");
     }
+
+    public void registerManager(String name, String email, String plainPassword, String role) {
+        personRepository.registerManager(name, email, plainPassword, role);
+        System.out.println("User registered successfully.");
+    }
 }

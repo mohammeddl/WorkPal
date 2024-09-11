@@ -33,6 +33,19 @@ public class PersonDaoImplt implements PersonDao{
         }
     }
 
+    public void registerManager(String name, String email, String password, String role) {
+        String query = "INSERT INTO manager (name, email, password, role) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            stmt.setString(3, password);
+            stmt.setString(4, role);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //method for logging in
     public Person login(String email, String password) {
         String query = "SELECT * FROM person WHERE email = ? AND password = ?";

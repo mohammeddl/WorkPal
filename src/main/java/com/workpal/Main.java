@@ -2,7 +2,7 @@ package main.java.com.workpal;
 
 import Menu.LoginMenu;
 import Menu.RegisterMenu;
-import Menu.ManagerMenu; 
+
 import main.java.com.workpal.dao.ManagerDaoImplt;
 import main.java.com.workpal.dao.MemberDaoImplt;
 import main.java.com.workpal.dao.PersonDaoImplt;
@@ -56,3 +56,5 @@ public class Main {
 
     }
 }
+
+

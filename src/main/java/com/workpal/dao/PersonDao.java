@@ -10,4 +10,5 @@ public interface PersonDao {
     Person login(String email, String password);
     void getAllMembersAndManagers();
     void registerUser(String name, String email, String plainPassword, String role);
+    void registerManager(String name, String email, String plainPassword, String role);
 }

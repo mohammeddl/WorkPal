@@ -16,6 +16,10 @@ public class PersonRepositoryImplt implements PersonRepository {
         personDao.registerUser(name, email, plainPassword, role);
     }
 
+    public void registerManager(String name, String email, String plainPassword, String role) {
+        personDao.registerManager(name, email, plainPassword, role);
+    }
+
     public Person findByEmailAndPassword(String email, String password) {
         return  personDao.login(email, password);
     }

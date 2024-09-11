@@ -2,11 +2,17 @@ package main.java.com.workpal.model;
 
 public class Event {
     private int eventId;
-    private String description;
+    private String name;
+    private String date;
+    private String location;
+    private int managerId;
 
-    public Event(int eventId, String description) {
+    public Event(int eventId, String name, String date, String location, int managerId) {
         this.eventId = eventId;
-        this.description = description;
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.managerId = managerId;
     }
 
     public int getEventId() {
@@ -18,13 +24,41 @@ public class Event {
     }
 
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDate() {
+        return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
+
+
+
+
 
     
 }
