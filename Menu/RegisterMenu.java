@@ -51,17 +51,15 @@ public class RegisterMenu {
         String email = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        System.out.print("Enter role (member/admin): ");
+        System.out.print("Enter role (member/manager): ");
         String role = scanner.nextLine().toLowerCase();
 
         switch (role) {
             case "member":
                 personServiceImplt.registerMember(name, email, password, role);
-                System.out.println("Member registered successfully.");
                 break;
-            case "admin":
-                adminServiceImplt.addMember(name, email, password, role);
-                System.out.println("Admin registered successfully.");
+            case "manager":
+                personServiceImplt.registerManager(name, email, password, role);
                 break;
             default:
                 System.out.println("Invalid role. Please enter 'member' or 'admin'.");
