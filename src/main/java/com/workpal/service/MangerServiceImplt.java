@@ -1,13 +1,12 @@
-package main.java.com.workpal.repository;
+package main.java.com.workpal.service;
 
- class ManagerRepositoryImplt implements ManagerRepository {
+public class MangerServiceImplt implements MangerService {
 
-   public void addEvent() {
+    public void addEvent() {
         System.out.println("Event added successfully.");
     }
 
     public void deleteEvents(int id) {
         System.out.println("Event deleted successfully.");
     }
-
 }
