@@ -6,33 +6,34 @@ import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Person;
 import main.java.com.workpal.service.ManagerServiceImplt;
 
+import main.java.com.workpal.model.Service;
 import java.util.List;
 
 public class ManagerMenu {
 
-    private Scanner scanner = new Scanner(System.in); // Use instance field for scanner
-    private ManagerServiceImplt managerServiceImplt; // Use instance field for service
+    private Scanner scanner = new Scanner(System.in); 
+    private ManagerServiceImplt managerServiceImplt; 
 
-    // Constructor to initialize ManagerServiceImplt
+    
     public ManagerMenu(ManagerServiceImplt managerServiceImplt) {
-        this.managerServiceImplt = managerServiceImplt; // Set the service instance
+        this.managerServiceImplt = managerServiceImplt; 
     }
 
-    // Method to display the main menu for the manager
     public void mainManagerMenu(Person person) {
+
         while (true) {
             displayManagerMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    manageEvents(person); // Call the instance method
+                    manageEvents(person); 
                     break;
                 case 2:
                     // manageSpaces();
                     break;
                 case 3:
-                    // manageServices();
+                managerServices(person);
                     break;
                 case 4:
                     // manageSubscriptions();
@@ -98,7 +99,6 @@ public class ManagerMenu {
         }
     }
 
-
     //method for displaying all events
     private void displayEvents(int managerId) {
         List<Event> events = managerServiceImplt.displayEventsManager(managerId);
@@ -142,6 +142,90 @@ public class ManagerMenu {
             managerServiceImplt.deleteEvent(managerId, eventId);
         } else {
             System.out.println("Service is not initialized.");
+        }
+    }
+
+
+    public void managerServices(Person person) {
+        System.out.println("Manage Services");
+        System.out.println("1. Add Service");
+        System.out.println("2. Update Service");
+        System.out.println("3. Delete Service");
+        System.out.println("4. View Services");
+        System.out.println("5. Back to main menu");
+        System.out.print("Choose an option: ");
+
+        
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+                
+            switch (choice) {
+                case 1:
+                    addService(person);
+                    break;
+                case 2:
+                    updateService(person);
+                    break;
+                case 3:
+                    deleteService(person);
+                    break;
+                case 4:
+                    displayServices(person.getId());
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+    }
+
+    private void addService(Person person) {
+       System.out.println("Enter Name of your food: ");
+        String food = scanner.nextLine();
+        if (managerServiceImplt != null) {
+            System.out.println("this is your name "+ food);
+            managerServiceImplt.addService(person.getId(), food);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void deleteService(Person person) {
+        System.out.println("Enter Service ID: ");
+        int serviceId = scanner.nextInt();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.deleteService(person.getId(), serviceId);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+
+    private void updateService(Person person) {
+        System.out.println("Enter Service ID: ");
+        int serviceId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Service name: ");
+        String name = scanner.nextLine();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.updateService(serviceId, person.getId(), name);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+
+    }
+
+    private void displayServices(int managerId) {
+        List<Service> services = managerServiceImplt.displayServicesManager(managerId);
+        if (services.isEmpty()) {
+            System.out.println("No services found.");
+        } else {
+            System.out.println("Service List:");
+            for (Service service : services) {
+                System.out.println("ID: " + service.getServiceId() +
+                                ", Name: " + service.getFood() +
+                                ", Manager ID: " + service.getManagerId());
+            }
         }
     }
 }
