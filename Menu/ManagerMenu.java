@@ -272,7 +272,7 @@ public class ManagerMenu {
         String type = scanner.nextLine();
         System.out.println("Enter space Status(empty OR not): ");
         String status = scanner.nextLine();
-        System.out.println("Enter space date(****/**/**): ");
+        System.out.println("Enter space date (yyyy-MM-dd): ");
         String date = scanner.nextLine();
         if (managerServiceImplt != null) {
             managerServiceImplt.addSpace(person.getId(), type, date, status);

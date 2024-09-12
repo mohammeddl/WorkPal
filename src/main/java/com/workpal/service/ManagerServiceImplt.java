@@ -6,6 +6,11 @@ import main.java.com.workpal.repository.ManagerRepositoryImplt;
 import main.java.com.workpal.model.Service;
 import main.java.com.workpal.model.Space;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 import java.util.List;
 
 public class ManagerServiceImplt implements ManagerService {
@@ -16,11 +21,24 @@ public class ManagerServiceImplt implements ManagerService {
         this.managerRepositoryImplt = managerRepositoryImplt;
     }
 
+    //method for validating date
+    private boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")); 
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
 
 
     public void addEvent(int mangerId, String name, String date, String location) {
+        if(isValidDate(date)){
         managerRepositoryImplt.addEvent(mangerId, name, date, location);
         System.out.println("Event added successfully.");
+    }else{
+        System.out.println("Invalid date format. Please enter date in yyyy-MM-dd format.");
+    }
     }
 
     public void deleteEvent(int managerId, int eventId) {
@@ -34,10 +52,13 @@ public class ManagerServiceImplt implements ManagerService {
     }
 
     public void updateEvent(int eventId, int managerId, String name, String date, String location) {
+        if(isValidDate(date)){
         managerRepositoryImplt.updateEvent(eventId, managerId, name, date, location);
         System.out.println("Event updated successfully.");
+    }else{
+        System.out.println("Invalid date format. Please enter date in yyyy-MM-dd format.");
     }
-
+    }
 
 //services
 
@@ -65,8 +86,12 @@ public class ManagerServiceImplt implements ManagerService {
     //spaces
 
     public void addSpace(int mangerId, String type, String date, String status) {
+        if(isValidDate(date)){
         managerRepositoryImplt.addSpace(mangerId, type, date, status);
         System.out.println("Space added successfully.");
+        }else{
+            System.out.println("Invalid date format. Please enter date in yyyy-MM-dd format.");
+        }
     }
 
     public void deleteSpace(int managerId, int spaceId) {
@@ -75,8 +100,12 @@ public class ManagerServiceImplt implements ManagerService {
     }
 
     public void updateSpace(int spaceId, int managerId, String type, String date, String status) {
+        if(isValidDate(date)){
         managerRepositoryImplt.updateSpace(spaceId, managerId, type, date, status);
         System.out.println("Space updated successfully.");
+        }else{
+            System.out.println("Invalid date format. Please enter date in yyyy-MM-dd format.");
+        }
     }
 
     public List<Space> displaySpacesManager(int managerId) {
