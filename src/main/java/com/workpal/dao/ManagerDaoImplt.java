@@ -3,6 +3,7 @@ package main.java.com.workpal.dao;
 import main.java.com.workpal.config.DatabaseConnection;
 import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -147,4 +148,76 @@ public class ManagerDaoImplt implements ManagerDao {
     }
         return services;
     }
+
+
+
+// spaces
+
+public void addSpace(int mangerId, String type, String date, String status){
+        String query = "INSERT INTO space ( type, status, managerid, date) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, type);
+            preparedStatement.setString(2, status);
+            preparedStatement.setInt(3, mangerId);
+            preparedStatement.setString(4, date);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+}
+
+    public void deleteSpace(int managerId, int spaceId){
+        String query = "DELETE FROM space WHERE managerid = ? AND spaceId = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, managerId);
+            preparedStatement.setInt(2, spaceId);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSpace(int spaceId, int managerId, String type, String date, String status){
+        String query = "UPDATE space SET type = ?, date = ?, status = ? WHERE spaceId = ? AND managerid = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, type);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, status);
+            preparedStatement.setInt(4, spaceId);
+            preparedStatement.setInt(5, managerId);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+}
+
+    public List<Space> displaySpacesManager(int managerId){
+        List<Space> spaces = new ArrayList<>();
+        String req = "SELECT * FROM space WHERE managerid = ? " ;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, managerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Space space = new Space(
+                        resultSet.getInt("spaceId"),
+                        resultSet.getString("type"),
+                        resultSet.getString("date"),
+                        resultSet.getString("status"),
+                        resultSet.getInt("managerid")
+                );
+                spaces.add(space);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+        return spaces;
+    }
+
+
+
+
 }

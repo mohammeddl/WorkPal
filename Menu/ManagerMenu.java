@@ -7,6 +7,8 @@ import main.java.com.workpal.model.Person;
 import main.java.com.workpal.service.ManagerServiceImplt;
 
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
+
 import java.util.List;
 
 public class ManagerMenu {
@@ -30,7 +32,7 @@ public class ManagerMenu {
                     manageEvents(person); 
                     break;
                 case 2:
-                    // manageSpaces();
+                    manageSpaces(person);
                     break;
                 case 3:
                 managerServices(person);
@@ -146,6 +148,8 @@ public class ManagerMenu {
     }
 
 
+
+// Method to manage services menu
     public void managerServices(Person person) {
         System.out.println("Manage Services");
         System.out.println("1. Add Service");
@@ -200,7 +204,6 @@ public class ManagerMenu {
         }
     }
 
-
     private void updateService(Person person) {
         System.out.println("Enter Service ID: ");
         int serviceId = scanner.nextInt();
@@ -228,6 +231,102 @@ public class ManagerMenu {
             }
         }
     }
+
+
+// Method to manage spaces menu
+    public void manageSpaces(Person person) {
+        System.out.println("Manage Spaces");
+        System.out.println("1. Add Space");
+        System.out.println("2. Update Space");
+        System.out.println("3. Delete Space");
+        System.out.println("4. View Spaces");
+        System.out.println("5. Back to main menu");
+        System.out.print("Choose an option: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                addSpace(person);
+                break;
+            case 2:
+                updateSpace(person);
+                break;
+            case 3:
+                deleteSpace(person);
+                break;
+            case 4:
+                displaySpaces(person.getId());
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Invalid choice. Try again.");
+        }
+    }
+
+   
+    private  void addSpace(Person person) {
+        System.out.println("Enter type of space(workspace/meeting room): ");
+        String type = scanner.nextLine();
+        System.out.println("Enter space Status(empty OR not): ");
+        String status = scanner.nextLine();
+        System.out.println("Enter space date(****/**/**): ");
+        String date = scanner.nextLine();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.addSpace(person.getId(), type, date, status);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void deleteSpace(Person person) {
+        displaySpaces(person.getId());
+        System.out.println("Enter Space ID: ");
+        int spaceId = scanner.nextInt();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.deleteSpace(person.getId(), spaceId);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void updateSpace(Person person) {
+        displaySpaces(person.getId());
+        System.out.println("Enter Space ID: ");
+        int spaceId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Space type: ");
+        String type = scanner.nextLine();
+        System.out.println("Enter Space date: ");
+        String date = scanner.nextLine();
+        System.out.println("Enter Space status: ");
+        String status = scanner.nextLine();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.updateSpace(spaceId, person.getId(), type, date, status);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void displaySpaces(int managerId) {
+        List<Space> spaces = managerServiceImplt.displaySpacesManager(managerId);
+        if (spaces.isEmpty()) {
+            System.out.println("No spaces found.");
+        } else {
+            System.out.println("Space List:");
+            for (Space space : spaces) {
+                System.out.println("ID: " + space.getSpaceId() +
+                                ", Type: " + space.getType() +
+                                ", Date: " + space.getDate() +
+                                ", Status: " + space.getStatus() +
+                                ", Manager ID: " + space.getManagerId());
+            }
+        }
+    }
+    
+
 }
 
 

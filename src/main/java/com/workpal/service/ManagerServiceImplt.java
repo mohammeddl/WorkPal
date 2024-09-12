@@ -4,6 +4,8 @@ import main.java.com.workpal.model.Event;
 import main.java.com.workpal.repository.ManagerRepositoryImplt;
 
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
+
 import java.util.List;
 
 public class ManagerServiceImplt implements ManagerService {
@@ -58,4 +60,29 @@ public class ManagerServiceImplt implements ManagerService {
     public List<Service> displayServicesManager(int managerId) {
         return managerRepositoryImplt.displayServicesManager(managerId);
     }
+
+
+    //spaces
+
+    public void addSpace(int mangerId, String type, String date, String status) {
+        managerRepositoryImplt.addSpace(mangerId, type, date, status);
+        System.out.println("Space added successfully.");
+    }
+
+    public void deleteSpace(int managerId, int spaceId) {
+        managerRepositoryImplt.deleteSpace(managerId, spaceId);
+        System.out.println("Space deleted successfully.");
+    }
+
+    public void updateSpace(int spaceId, int managerId, String type, String date, String status) {
+        managerRepositoryImplt.updateSpace(spaceId, managerId, type, date, status);
+        System.out.println("Space updated successfully.");
+    }
+
+    public List<Space> displaySpacesManager(int managerId) {
+        return managerRepositoryImplt.displaySpacesManager(managerId);
+    }
+    
+
+
 }

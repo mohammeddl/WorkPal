@@ -1,6 +1,8 @@
 package main.java.com.workpal.repository;
 
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
+
 import java.util.List;
 
 import main.java.com.workpal.model.Event;
@@ -18,4 +20,14 @@ public interface ManagerRepository {
     void deleteService(int managerId, int serviceId);
     void updateService(int serviceId, int managerId, String food);
     List<Service> displayServicesManager(int managerId);
+
+    //spaces
+
+    void addSpace(int mangerId, String type, String date, String status);
+    void deleteSpace(int managerId, int spaceId);
+    void updateSpace(int spaceId, int managerId, String type, String date, String status);
+    List<Space> displaySpacesManager(int managerId);
+    
+
+
 }

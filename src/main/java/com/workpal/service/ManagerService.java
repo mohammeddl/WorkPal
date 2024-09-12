@@ -3,6 +3,8 @@ package main.java.com.workpal.service;
 import main.java.com.workpal.model.Event;
 
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
+
 import java.util.List;
 
 
@@ -19,7 +21,10 @@ public interface ManagerService {
     List<Service> displayServicesManager(int managerId);
 
 
-
+    void addSpace(int mangerId, String type, String date, String status);
+    void deleteSpace(int managerId, int spaceId);
+    void updateSpace(int spaceId, int managerId, String type, String date, String status);
+    List<Space> displaySpacesManager(int managerId);
 
     
 }

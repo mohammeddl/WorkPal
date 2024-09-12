@@ -3,6 +3,8 @@ package main.java.com.workpal.repository;
 import main.java.com.workpal.dao.ManagerDaoImplt;
 import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Service;
+import main.java.com.workpal.model.Space;
+
 import java.util.List;
 
 public class ManagerRepositoryImplt implements ManagerRepository {
@@ -48,4 +50,24 @@ public class ManagerRepositoryImplt implements ManagerRepository {
         return managerDao.displayServicesManager(managerId);
     }
 
+
+    //spaces
+
+    public void addSpace(int mangerId, String type, String date, String status) {
+        managerDao.addSpace(mangerId, type, date, status);
+    }
+
+    public void deleteSpace(int managerId, int spaceId) {
+        managerDao.deleteSpace(managerId, spaceId);
+    }
+
+    public void updateSpace(int spaceId, int managerId, String type, String date, String status) {
+        managerDao.updateSpace(spaceId, managerId, type, date, status);
+    }
+
+    public List<Space> displaySpacesManager(int managerId) {
+        return managerDao.displaySpacesManager(managerId);
+    }
+
+    
 }
