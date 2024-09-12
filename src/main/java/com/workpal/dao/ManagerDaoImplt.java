@@ -31,14 +31,17 @@ public class ManagerDaoImplt implements ManagerDao {
     }
 }
 
-    public void deleteEvents(int id){
-        String query = "DELETE FROM event WHERE id = " + id;
+    public void deleteEvents(int managerId, int eventId){
+        String query = "DELETE FROM event WHERE managerid = ? AND eventId = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, managerId);
+            preparedStatement.setInt(2, eventId);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-    }
+        }
+       
     }
     
 
@@ -65,5 +68,22 @@ public class ManagerDaoImplt implements ManagerDao {
         return events;
     }
        
+
+
+    public void updateEvent(int eventId, int managerId, String name, String date, String location){
+        String query = "UPDATE event SET name = ?, date = ?, location = ? WHERE eventId = ? AND managerid = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, location);
+            preparedStatement.setInt(4, eventId);
+            preparedStatement.setInt(5, managerId);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+}
+
 
 }

@@ -6,7 +6,8 @@ import main.java.com.workpal.model.Event;
 
 public interface ManagerRepository {
     void addEvent(int mangerId, String name, String date, String location);
-    void deleteEvents(int id);
+    void deleteEvents(int managerId, int eventId);
     List<Event> displayEventsManager(int managerId);
+    void updateEvent(int eventId, int managerId, String name, String date, String location);
     
 }

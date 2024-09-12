@@ -83,23 +83,10 @@ public class ManagerMenu {
                 }
                 break;
             case 2:
-                System.out.println("Enter event id: ");
-                int id = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println("Enter event name: ");
-                name = scanner.nextLine();
-                System.out.println("Enter event date: ");
-                date = scanner.nextLine();
-                System.out.println("Enter event location: ");
-                location = scanner.nextLine();
-                // Uncomment when update functionality is implemented
-                // managerServiceImplt.updateEvent(id, name, date, location);
+                updateEvent(person.getId());
                 break;
             case 3:
-                System.out.println("Enter event id: ");
-                id = scanner.nextInt();
-                scanner.nextLine();
-                managerServiceImplt.deleteEvent(id);
+                deleteEvent(person.getId());
                 break;
             case 4:
             displayEvents(person.getId());
@@ -128,4 +115,35 @@ public class ManagerMenu {
             }
         }
     }
+
+    private void updateEvent(int managerId) {
+        displayEvents(managerId);
+        System.out.println("Enter event ID: ");
+        int eventId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter event name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter event date: ");
+        String date = scanner.nextLine();
+        System.out.println("Enter event location: ");
+        String location = scanner.nextLine();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.updateEvent(eventId,managerId, name, date, location);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void deleteEvent(int managerId) {
+        displayEvents(managerId);
+        System.out.println("Enter event ID: ");
+        int eventId = scanner.nextInt();
+        if (managerServiceImplt != null) {
+            managerServiceImplt.deleteEvent(managerId, eventId);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
 }
+
+

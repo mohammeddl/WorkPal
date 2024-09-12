@@ -19,12 +19,18 @@ public class ManagerServiceImplt implements ManagerService {
         System.out.println("Event added successfully.");
     }
 
-    public void deleteEvent(int id) {
+    public void deleteEvent(int managerId, int eventId) {
+        managerRepositoryImplt.deleteEvents(managerId, eventId);
         System.out.println("Event deleted successfully.");
     }
 
     public List<Event> displayEventsManager(int managerId) {
         return managerRepositoryImplt.displayEventsManager(managerId);
        
+    }
+
+    public void updateEvent(int eventId, int managerId, String name, String date, String location) {
+        managerRepositoryImplt.updateEvent(eventId, managerId, name, date, location);
+        System.out.println("Event updated successfully.");
     }
 }
