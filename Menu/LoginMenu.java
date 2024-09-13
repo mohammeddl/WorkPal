@@ -1,11 +1,14 @@
 package Menu;
 
 import java.util.Scanner;
+import java.util.concurrent.Flow.Subscription;
+
 import main.java.com.workpal.model.Person;
 import main.java.com.workpal.repository.PersonRepositoryImplt;
 import main.java.com.workpal.service.AdminServiceImplt;
 import main.java.com.workpal.service.ManagerServiceImplt;
 import main.java.com.workpal.service.MemberServiceImplt;
+import main.java.com.workpal.service.SubscriptionServiceImplt;
 
 public class LoginMenu {
 
@@ -13,13 +16,15 @@ public class LoginMenu {
     private static AdminServiceImplt adminServiceImplt;
     private static MemberServiceImplt memberServiceImplt;
     private static ManagerServiceImplt managerServiceImplt;
+    private static SubscriptionServiceImplt subscriptionServiceImplt;
 
     public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminServiceImplt adminServiceImplt,
-                     MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt) {
+                     MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt) {
         LoginMenu.personRepositoryImplt = personRepositoryImplt;
         LoginMenu.adminServiceImplt = adminServiceImplt;
         LoginMenu.memberServiceImplt = memberServiceImplt;
         LoginMenu.managerServiceImplt = managerServiceImplt;
+        LoginMenu.subscriptionServiceImplt = subscriptionServiceImplt;
     }
 
     public static void displayLoginMenu() {
@@ -40,7 +45,7 @@ public class LoginMenu {
                 MemberMenu.mainMemberMenu(person);
             } else if (person.getRole().equals("manager")) {
                 // Create an instance of ManagerMenu and call the instance method
-                ManagerMenu managerMenu = new ManagerMenu(managerServiceImplt);
+                ManagerMenu managerMenu = new ManagerMenu(managerServiceImplt, subscriptionServiceImplt);
                 managerMenu.mainManagerMenu(person);
             } else {
                 System.out.println("You are not authorized to manage members.");

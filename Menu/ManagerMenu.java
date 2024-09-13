@@ -1,11 +1,11 @@
 package Menu;
 
 import java.util.Scanner;
-
+import main.java.com.workpal.model.Subscription;
 import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Person;
 import main.java.com.workpal.service.ManagerServiceImplt;
-
+import main.java.com.workpal.service.SubscriptionServiceImplt;
 import main.java.com.workpal.model.Service;
 import main.java.com.workpal.model.Space;
 
@@ -15,10 +15,12 @@ public class ManagerMenu {
 
     private Scanner scanner = new Scanner(System.in); 
     private ManagerServiceImplt managerServiceImplt; 
+    private SubscriptionServiceImplt subscriptionServiceImplt;
 
     
-    public ManagerMenu(ManagerServiceImplt managerServiceImplt) {
+    public ManagerMenu(ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt) {
         this.managerServiceImplt = managerServiceImplt; 
+        this.subscriptionServiceImplt = subscriptionServiceImplt;
     }
 
     public void mainManagerMenu(Person person) {
@@ -35,10 +37,10 @@ public class ManagerMenu {
                     manageSpaces(person);
                     break;
                 case 3:
-                managerServices(person);
+                    managerServices(person);
                     break;
                 case 4:
-                    // manageSubscriptions();
+                    manageSubsciptions(person);
                     break;
                 case 5:
                     return;
@@ -75,7 +77,7 @@ public class ManagerMenu {
             case 1:
                 System.out.println("Enter event name: ");
                 String name = scanner.nextLine();
-                System.out.println("Enter event date: ");
+                System.out.println("Enter event date (yyyy-MM-dd): ");
                 String date = scanner.nextLine();
                 System.out.println("Enter event location: ");
                 String location = scanner.nextLine();
@@ -266,7 +268,6 @@ public class ManagerMenu {
         }
     }
 
-   
     private  void addSpace(Person person) {
         System.out.println("Enter type of space(workspace/meeting room): ");
         String type = scanner.nextLine();
@@ -326,6 +327,137 @@ public class ManagerMenu {
         }
     }
     
+
+
+    // Method to manage subscriptions
+
+    public void manageSubsciptions(Person person) {
+        System.out.println("Manage Subscriptions");
+        System.out.println("1. Add Subscription");
+        System.out.println("2. Update Subscription");
+        System.out.println("3. Delete Subscription");
+        System.out.println("4. View Subscriptions");
+        System.out.println("5. Back to main menu");
+        System.out.print("Choose an option: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                addSubscription(person);
+                break;
+            case 2:
+                updateSubscription(person);
+                break;
+            case 3:
+                deleteSubscription(person);
+                break;
+            case 4:
+                viewSubscription(person);
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Invalid choice. Try again.");
+        }
+    }
+
+
+    //method to add subscription
+    private void addSubscription(Person person) {
+        displaySpaces(person.getId());
+        System.out.println("Enter space ID: ");
+        int spaceId = scanner.nextInt();
+        scanner.nextLine(); 
+        displayServices(person.getId());
+        System.out.println("Enter service ID: ");
+        int serviceId = scanner.nextInt();
+        scanner.nextLine();
+        displayEvents(person.getId());
+        System.out.println("Enter event ID: ");
+        int eventId = scanner.nextInt();
+        scanner.nextLine(); 
+        System.out.println("Enter start date (yyyy-MM-dd): ");
+        String dateStart = scanner.nextLine();
+        System.out.println("Enter end date (yyyy-MM-dd): ");
+        String dateEnd = scanner.nextLine(); 
+        System.out.println("Enter price: ");
+        int price = scanner.nextInt();
+        scanner.nextLine();  
+        if (subscriptionServiceImplt != null) {
+            subscriptionServiceImplt.addSubscription(person.getId(), spaceId, serviceId, eventId, dateStart, dateEnd, price);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+    
+
+
+    private void viewSubscription(Person person) {
+        List<Subscription> subscriptions = subscriptionServiceImplt.viewSubscription();
+        
+        if (subscriptions.isEmpty()) {
+            System.out.println("No subscriptions found.");
+        } else {
+            System.out.println("Subscription List:");
+            subscriptions.stream()
+                .filter(subscription -> subscription.getManagerId() == person.getId()) 
+                .forEach(subscription -> System.out.println(
+                    "ID: " + subscription.getSubscriptionId() +
+                    ", Space ID: " + subscription.getSpaceId() +
+                    ", Service ID: " + subscription.getServiceId() +
+                    ", Event ID: " + subscription.getEventId() +
+                    ", Start Date: " + subscription.getDateStart() +
+                    ", End Date: " + subscription.getDateEnd() +
+                    ", Price: " + subscription.getPrice()
+                ));
+        }
+    }
+    
+
+
+    private void deleteSubscription(Person person) {
+        viewSubscription(person);
+        System.out.println("Enter Subscription ID: ");
+        int subscriptionId = scanner.nextInt();
+        if (subscriptionServiceImplt != null) {
+            subscriptionServiceImplt.deleteSubscription(subscriptionId);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
+    private void updateSubscription(Person person) {
+        System.out.println("Enter Subscription ID: ");
+        int subscriptionId = scanner.nextInt();
+        scanner.nextLine();
+        displaySpaces(person.getId());
+        System.out.println("Enter space ID: ");
+        int spaceId = scanner.nextInt();
+        scanner.nextLine();
+        displayServices(person.getId());
+        System.out.println("Enter service ID: ");
+        int serviceId = scanner.nextInt();
+        scanner.nextLine();
+        displayEvents(person.getId());
+        System.out.println("Enter event ID: ");
+        int eventId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter start date (yyyy-MM-dd): ");
+        String dateStart = scanner.nextLine();
+        System.out.println("Enter end date (yyyy-MM-dd): ");
+        String dateEnd = scanner.nextLine();
+        System.out.println("Enter price: ");
+        int price = scanner.nextInt();
+        scanner.nextLine();
+        if (subscriptionServiceImplt != null) {
+            subscriptionServiceImplt.updateSubscription(subscriptionId, person.getId(), spaceId, serviceId, eventId, dateStart, dateEnd, price);
+        } else {
+            System.out.println("Service is not initialized.");
+        }
+    }
+
 
 }
 
