@@ -11,4 +11,7 @@ public interface MemberService {
     //display all spaces
     List<Space> viewAllSpaces();
     
+
+    void resetPassword(String email);
+    void changePassword(int memberId, String newPassword);
 } 

@@ -1,3 +1,4 @@
+
 package main.java.com.workpal.service;
 
 import main.java.com.workpal.model.Reservation;
@@ -13,9 +14,9 @@ public class ReservationServiceImplt implements ReservationService {
         this.reservationRepositoryImplt = reservationRepositoryImplt;
     }
 
+
     public void addReservation(int memberId, int spaceId, String reservationStartDate, String reservationEndDate) {
         reservationRepositoryImplt.addReservation(memberId, spaceId, reservationStartDate, reservationEndDate);
-      
     }
 
     public List<Reservation> getReservationsByMember(int memberId) {

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import main.java.com.workpal.config.DatabaseConnection;
+import main.java.com.workpal.model.Member;
 import main.java.com.workpal.model.Space;
 
 public class MemberDaoImplt {
@@ -53,4 +54,51 @@ public class MemberDaoImplt {
         return spaces;
     }
 
+
+     public Member findByEmail(String email) {
+        String query = "SELECT * FROM member WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, email);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                return new Member(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),
+                    resultSet.getString("role"),
+                    resultSet.getString("temporary_password")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void updateTemporaryPassword(int memberId, String tempPassword) {
+        String query = "UPDATE member SET temporary_password = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, tempPassword);
+            stmt.setInt(2, memberId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void updatePassword(int memberId, String newPassword) {
+        String query = "UPDATE member SET password = ?, temporary_password = NULL WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, newPassword);
+            stmt.setInt(2, memberId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 }

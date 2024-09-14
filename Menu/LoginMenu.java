@@ -22,7 +22,7 @@ public class LoginMenu {
     private static FavoriteServiceImplt favoriteServiceImplt;
 
     public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminServiceImplt adminServiceImplt,
-                     MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt, ReservationServiceImplt reservationServiceImplt, FavoriteServiceImplt favoriteServiceImplt) {
+                    MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt, ReservationServiceImplt reservationServiceImplt, FavoriteServiceImplt favoriteServiceImplt) {
         LoginMenu.personRepositoryImplt = personRepositoryImplt;
         LoginMenu.adminServiceImplt = adminServiceImplt;
         LoginMenu.memberServiceImplt = memberServiceImplt;

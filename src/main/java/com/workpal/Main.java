@@ -1,5 +1,4 @@
 package main.java.com.workpal;
-
 import Menu.LoginMenu;
 import Menu.RegisterMenu;
 import main.java.com.workpal.dao.FavoriteDaoImplt;
@@ -17,6 +16,8 @@ import main.java.com.workpal.repository.ReservationRepositoryImplt;
 import main.java.com.workpal.repository.SubscriptionRepositoryImplt;
 // import main.java.com.workpal.service.AdminServiceImplt;
 import main.java.com.workpal.service.AdminServiceImplt;
+import main.java.com.workpal.service.EmailService;
+import main.java.com.workpal.service.EmailServiceImpl;
 import main.java.com.workpal.service.FavoriteServiceImplt;
 import main.java.com.workpal.service.ManagerServiceImplt;
 import main.java.com.workpal.service.MemberServiceImplt;
@@ -44,9 +45,11 @@ public class Main {
         SubscriptionRepositoryImplt subscriptionRepositoryImplt = new SubscriptionRepositoryImplt(subscriptionDao);
         ReservationRepositoryImplt reservationRepositoryImplt = new ReservationRepositoryImplt(reservationDao);
         FavoriteRepositoryImplt favoriteRepositoryImplt = new FavoriteRepositoryImplt(favoriteDao);
+
         
+        EmailService emailService = new EmailServiceImpl();
+        MemberServiceImplt memberServiceImplt = new MemberServiceImplt(memberRepositoryImplt, emailService);
         AdminServiceImplt adminServiceImplt = new AdminServiceImplt(adminRepositoryImplt);
-        MemberServiceImplt memberServiceImplt = new MemberServiceImplt(memberRepositoryImplt);
         PersonServiceImplt personServiceImplt = new PersonServiceImplt(personRepository);
         ManagerServiceImplt managerServiceImplt = new ManagerServiceImplt(managerRepositoryImplt);
         SubscriptionServiceImplt subscriptionServiceImplt = new SubscriptionServiceImplt(subscriptionRepositoryImplt);
@@ -54,12 +57,19 @@ public class Main {
         FavoriteServiceImplt favoriteServiceImplt = new FavoriteServiceImplt(favoriteRepositoryImplt);
 
 
+
+
         new LoginMenu(personRepository, adminServiceImplt, memberServiceImplt, managerServiceImplt, subscriptionServiceImplt, reservationServiceImplt, favoriteServiceImplt);
-        new RegisterMenu(personServiceImplt, adminServiceImplt);
+        new RegisterMenu(personServiceImplt, adminServiceImplt, memberServiceImplt);
 
         RegisterMenu.mainRegisterMenu();
+        System.out.println("Register Menu");
         LoginMenu.displayLoginMenu();
     }
+
+
+
+
 }
 
 
