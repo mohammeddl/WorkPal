@@ -10,9 +10,9 @@ public class MemberServiceImplt implements MemberService {
 
 
     private final MemberRepositoryImplt memberRepositoryImplt;
-    private EmailService emailService;
+    private EmailServiceImpl emailService;
 
-    public MemberServiceImplt(MemberRepositoryImplt memberRepositoryImplt, EmailService emailService) {
+    public MemberServiceImplt(MemberRepositoryImplt memberRepositoryImplt, EmailServiceImpl emailService) {
         this.memberRepositoryImplt = memberRepositoryImplt;
         this.emailService = emailService;
         
@@ -50,6 +50,7 @@ public class MemberServiceImplt implements MemberService {
         }
     }
 
+    
     public void changePassword(int memberId, String newPassword) {
         memberRepositoryImplt.updatePassword(memberId, newPassword);
     }
