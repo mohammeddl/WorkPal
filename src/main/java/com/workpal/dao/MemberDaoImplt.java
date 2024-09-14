@@ -3,8 +3,12 @@ package main.java.com.workpal.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import main.java.com.workpal.config.DatabaseConnection;
+import main.java.com.workpal.model.Space;
 
 public class MemberDaoImplt {
 
@@ -28,5 +32,25 @@ public class MemberDaoImplt {
     }
 
 
+   public List<Space> viewAllSpaces() {
+        List<Space> spaces = new ArrayList<>();
+        String query = "SELECT * FROM space";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Space space = new Space(
+                        resultSet.getInt("spaceId"),
+                        resultSet.getString("type"),
+                        resultSet.getString("date"),
+                        resultSet.getString("status"),
+                        resultSet.getInt("managerId")
+                );
+                spaces.add(space);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return spaces;
+    }
 
 }

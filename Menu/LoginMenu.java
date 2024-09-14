@@ -4,10 +4,12 @@ import java.util.Scanner;
 import java.util.concurrent.Flow.Subscription;
 
 import main.java.com.workpal.model.Person;
+import main.java.com.workpal.model.Reservation;
 import main.java.com.workpal.repository.PersonRepositoryImplt;
 import main.java.com.workpal.service.AdminServiceImplt;
 import main.java.com.workpal.service.ManagerServiceImplt;
 import main.java.com.workpal.service.MemberServiceImplt;
+import main.java.com.workpal.service.ReservationServiceImplt;
 import main.java.com.workpal.service.SubscriptionServiceImplt;
 
 public class LoginMenu {
@@ -17,14 +19,16 @@ public class LoginMenu {
     private static MemberServiceImplt memberServiceImplt;
     private static ManagerServiceImplt managerServiceImplt;
     private static SubscriptionServiceImplt subscriptionServiceImplt;
+    private static ReservationServiceImplt reservationServiceImplt;
 
     public LoginMenu(PersonRepositoryImplt personRepositoryImplt, AdminServiceImplt adminServiceImplt,
-                     MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt) {
+                     MemberServiceImplt memberServiceImplt, ManagerServiceImplt managerServiceImplt, SubscriptionServiceImplt subscriptionServiceImplt, ReservationServiceImplt reservationServiceImplt) {
         LoginMenu.personRepositoryImplt = personRepositoryImplt;
         LoginMenu.adminServiceImplt = adminServiceImplt;
         LoginMenu.memberServiceImplt = memberServiceImplt;
         LoginMenu.managerServiceImplt = managerServiceImplt;
         LoginMenu.subscriptionServiceImplt = subscriptionServiceImplt;
+        LoginMenu.reservationServiceImplt = reservationServiceImplt;
     }
 
     public static void displayLoginMenu() {
@@ -42,9 +46,9 @@ public class LoginMenu {
             if (person.getRole().equals("admin")) {
                 AdminMenu.displayAdminMenu(adminServiceImplt);
             } else if (person.getRole().equals("member")) {
-                MemberMenu.mainMemberMenu(person);
+                MemberMenu memberMenu = new MemberMenu(memberServiceImplt, reservationServiceImplt);
+                memberMenu.mainMemberMenu(person);
             } else if (person.getRole().equals("manager")) {
-                // Create an instance of ManagerMenu and call the instance method
                 ManagerMenu managerMenu = new ManagerMenu(managerServiceImplt, subscriptionServiceImplt);
                 managerMenu.mainManagerMenu(person);
             } else {

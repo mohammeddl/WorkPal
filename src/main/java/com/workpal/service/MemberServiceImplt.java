@@ -1,6 +1,8 @@
 package main.java.com.workpal.service;
 
 import main.java.com.workpal.repository.MemberRepositoryImplt;
+import main.java.com.workpal.model.Space;
+import java.util.List;
 
 public class MemberServiceImplt implements MemberService {
 
@@ -14,6 +16,10 @@ public class MemberServiceImplt implements MemberService {
     public void modifyProfile(int id, String name, String email) {
         memberRepositoryImplt.modifyProfile(id, name, email);
         System.out.println("Profile updated successfully.");
+    }
+
+    public List<Space> viewAllSpaces() {
+        return memberRepositoryImplt.viewAllSpaces();
     }
     
 }

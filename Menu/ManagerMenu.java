@@ -24,7 +24,6 @@ public class ManagerMenu {
     }
 
     public void mainManagerMenu(Person person) {
-
         while (true) {
             displayManagerMenu();
             int choice = scanner.nextInt();
@@ -119,7 +118,7 @@ public class ManagerMenu {
             }
         }
     }
-
+//update event
     private void updateEvent(int managerId) {
         displayEvents(managerId);
         System.out.println("Enter event ID: ");
@@ -137,7 +136,7 @@ public class ManagerMenu {
             System.out.println("Service is not initialized.");
         }
     }
-
+//delete event
     private void deleteEvent(int managerId) {
         displayEvents(managerId);
         System.out.println("Enter event ID: ");
@@ -185,6 +184,7 @@ public class ManagerMenu {
             }
     }
 
+    // Method to add service
     private void addService(Person person) {
        System.out.println("Enter Name of your food: ");
         String food = scanner.nextLine();
@@ -196,6 +196,7 @@ public class ManagerMenu {
         }
     }
 
+    // Method to delete service
     private void deleteService(Person person) {
         System.out.println("Enter Service ID: ");
         int serviceId = scanner.nextInt();
@@ -205,7 +206,7 @@ public class ManagerMenu {
             System.out.println("Service is not initialized.");
         }
     }
-
+ // Method to update service
     private void updateService(Person person) {
         System.out.println("Enter Service ID: ");
         int serviceId = scanner.nextInt();
@@ -219,7 +220,7 @@ public class ManagerMenu {
         }
 
     }
-
+// Method to display all services
     private void displayServices(int managerId) {
         List<Service> services = managerServiceImplt.displayServicesManager(managerId);
         if (services.isEmpty()) {
@@ -268,6 +269,7 @@ public class ManagerMenu {
         }
     }
 
+    // Method to add space
     private  void addSpace(Person person) {
         System.out.println("Enter type of space(workspace/meeting room): ");
         String type = scanner.nextLine();
@@ -282,6 +284,7 @@ public class ManagerMenu {
         }
     }
 
+    // Method to delete space
     private void deleteSpace(Person person) {
         displaySpaces(person.getId());
         System.out.println("Enter Space ID: ");
@@ -293,6 +296,7 @@ public class ManagerMenu {
         }
     }
 
+    // Method to update space
     private void updateSpace(Person person) {
         displaySpaces(person.getId());
         System.out.println("Enter Space ID: ");
@@ -311,6 +315,7 @@ public class ManagerMenu {
         }
     }
 
+    // Method to display all spaces
     private void displaySpaces(int managerId) {
         List<Space> spaces = managerServiceImplt.displaySpacesManager(managerId);
         if (spaces.isEmpty()) {
@@ -330,7 +335,7 @@ public class ManagerMenu {
 
 
     // Method to manage subscriptions
-
+//menu for managing subscriptions
     public void manageSubsciptions(Person person) {
         System.out.println("Manage Subscriptions");
         System.out.println("1. Add Subscription");
@@ -364,6 +369,8 @@ public class ManagerMenu {
     }
 
 
+    //subscription
+
     //method to add subscription
     private void addSubscription(Person person) {
         displaySpaces(person.getId());
@@ -393,7 +400,7 @@ public class ManagerMenu {
     }
     
 
-
+//method to view subscription
     private void viewSubscription(Person person) {
         List<Subscription> subscriptions = subscriptionServiceImplt.viewSubscription();
         
@@ -416,7 +423,7 @@ public class ManagerMenu {
     }
     
 
-
+//method to delete subscription
     private void deleteSubscription(Person person) {
         viewSubscription(person);
         System.out.println("Enter Subscription ID: ");
@@ -428,6 +435,7 @@ public class ManagerMenu {
         }
     }
 
+    //method to update subscription
     private void updateSubscription(Person person) {
         System.out.println("Enter Subscription ID: ");
         int subscriptionId = scanner.nextInt();
