@@ -1,13 +1,18 @@
 package Menu;
 
+import java.util.List;
 import java.util.Scanner;
 
+import main.java.com.workpal.model.Event;
+import main.java.com.workpal.model.Person;
 import main.java.com.workpal.service.AdminServiceImplt;
+import main.java.com.workpal.service.PersonServiceImplt;
 
 
 
 public class AdminMenu {
 
+    private static PersonServiceImplt personService;
     
     public static void displayAdminMenu(AdminServiceImplt adminServiceImplt) {
         Scanner scanner = new Scanner(System.in);
@@ -17,7 +22,8 @@ public class AdminMenu {
             System.out.println("1. Add Member");
             System.out.println("2. Delete Member");
             System.out.println("3. display all members and managers");
-            System.out.println("4. Exit");
+            System.out.println("4. Raport");
+            System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();  
@@ -43,10 +49,22 @@ public class AdminMenu {
                     adminServiceImplt.displayAllMembers();
                     break;
                 case 4:
+                displayRaport();
+                    break;
+                case 5:
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Try again.");
             }
         }
+    }
+
+    private static void displayRaport() {
+        System.out.println("Raport:");
+        List<Person> members = personService.getAllMembers();
+        members.forEach(member -> System.out.println(member));
+        List<Event> events = personService.getAllEvents();
+        events.forEach(event -> System.out.println(event));
+
     }
 }
