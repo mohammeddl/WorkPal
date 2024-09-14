@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 
 import java.sql.SQLException;
-
-
+import java.util.List;
+import java.util.ArrayList;
 
 import main.java.com.workpal.config.DatabaseConnection;
+import main.java.com.workpal.model.Event;
 import main.java.com.workpal.model.Person;
 
 public class PersonDaoImplt implements PersonDao{
@@ -114,4 +115,45 @@ public class PersonDaoImplt implements PersonDao{
 
 
 
+    //method for getting all members
+    public List<Person> getAllMembers() {
+        List<Person> members = new ArrayList<>();
+        String query = "SELECT * FROM person";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                members.add(new Person(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email"),
+                        resultSet.getString("role")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+
+    //method for getting all events
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        String query = "SELECT * FROM event";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                events.add(new Event(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("location"),
+                        resultSet.getInt("manager_id")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
 }
