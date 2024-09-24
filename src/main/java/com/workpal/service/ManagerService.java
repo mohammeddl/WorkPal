@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public interface ManagerService {
+    
     void addEvent(int mangerId, String name, String date, String location);
     void deleteEvent(int managerId, int eventId);
     List<Event> displayEventsManager(int managerId);
